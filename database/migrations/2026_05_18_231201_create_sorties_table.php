@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('sorties', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('entree_id')->constrained()->onDelete('cascade');
+    $table->date('date_sortie');
+    $table->date('date_retour_prevue')->nullable();
+    $table->date('date_retour_reel')->nullable();
+    $table->string('etat_document');
+    $table->timestamps();
+});
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('sorties');
+    }
+};
